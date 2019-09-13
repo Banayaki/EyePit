@@ -1,0 +1,6592 @@
+{
+ "model_info": {
+  "name": "MakiSegmentator",
+  "input_s": "Input",
+  "output": "output"
+ },
+ "graph_info": [
+  {
+   "name": "Input",
+   "parent_tensor_names": [],
+   "type": "InputLayer",
+   "params": {
+    "name": "Input",
+    "input_shape": [
+     2,
+     1024,
+     1024,
+     3
+    ]
+   }
+  },
+  {
+   "name": "conv1/weights",
+   "parent_tensor_names": [
+    "Input"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "conv1/weights",
+     "shape": [
+      7,
+      7,
+      3,
+      64
+     ],
+     "stride": 2,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "conv1/BatchNorm",
+   "parent_tensor_names": [
+    "conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "conv1/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "activation",
+   "parent_tensor_names": [
+    "conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "max_pooling2d",
+   "parent_tensor_names": [
+    "activation"
+   ],
+   "parent_layer_info": {
+    "type": "MaxPoolLayer",
+    "params": {
+     "name": "max_pooling2d",
+     "ksize": [
+      1,
+      3,
+      3,
+      1
+     ],
+     "strides": [
+      1,
+      2,
+      2,
+      1
+     ],
+     "padding": "SAME"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/shortcut/weights",
+   "parent_tensor_names": [
+    "max_pooling2d"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/shortcut/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/shortcut/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_1/bottleneck_v1/shortcut/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/shortcut/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "max_pooling2d"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_1/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/conv1/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block1/unit_1/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block1/unit_1/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_1/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/conv2/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block1/unit_1/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block1/unit_1/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_1/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_1/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_1/bottleneck_v1/conv3/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add",
+   "parent_tensor_names": [
+    "block1/unit_1/bottleneck_v1/shortcut/BatchNorm",
+    "block1/unit_1/bottleneck_v1/conv3/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add"
+    }
+   }
+  },
+  {
+   "name": "activation_3",
+   "parent_tensor_names": [
+    "add"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_3",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_2/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_3"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_2/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_2/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_2/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_2/bottleneck_v1/conv1/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block1/unit_2/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block1/unit_2/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block1/unit_2/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_2/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block1/unit_2/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_2/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_2/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_2/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_2/bottleneck_v1/conv2/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block1/unit_2/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block1/unit_2/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block1/unit_2/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_2/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block1/unit_2/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_2/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_2/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_2/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_2/bottleneck_v1/conv3/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add1",
+   "parent_tensor_names": [
+    "block1/unit_2/bottleneck_v1/conv3/BatchNorm",
+    "activation_3"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add1"
+    }
+   }
+  },
+  {
+   "name": "activation_6",
+   "parent_tensor_names": [
+    "add1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_6",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_3/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_6"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_3/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_3/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_3/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_3/bottleneck_v1/conv1/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block1/unit_3/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block1/unit_3/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block1/unit_3/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_3/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block1/unit_3/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_3/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_3/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_3/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_3/bottleneck_v1/conv2/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block1/unit_3/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block1/unit_3/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block1/unit_3/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_3/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block1/unit_3/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block1/unit_3/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block1/unit_3/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block1/unit_3/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block1/unit_3/bottleneck_v1/conv3/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add2",
+   "parent_tensor_names": [
+    "block1/unit_3/bottleneck_v1/conv3/BatchNorm",
+    "activation_6"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add2"
+    }
+   }
+  },
+  {
+   "name": "activation_9",
+   "parent_tensor_names": [
+    "add2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_9",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_9"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      128
+     ],
+     "stride": 2,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_1/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/conv1/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block2/unit_1/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block2/unit_1/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_1/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/conv2/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block2/unit_1/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block2/unit_1/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_1/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/conv3/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/shortcut/weights",
+   "parent_tensor_names": [
+    "activation_9"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/shortcut/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      512
+     ],
+     "stride": 2,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_1/bottleneck_v1/shortcut/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_1/bottleneck_v1/shortcut/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_1/bottleneck_v1/shortcut/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add3",
+   "parent_tensor_names": [
+    "block2/unit_1/bottleneck_v1/conv3/BatchNorm",
+    "block2/unit_1/bottleneck_v1/shortcut/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add3"
+    }
+   }
+  },
+  {
+   "name": "activation_12",
+   "parent_tensor_names": [
+    "add3"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_12",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_2/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_12"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_2/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_2/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_2/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_2/bottleneck_v1/conv1/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block2/unit_2/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block2/unit_2/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block2/unit_2/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_2/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block2/unit_2/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_2/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_2/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_2/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_2/bottleneck_v1/conv2/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block2/unit_2/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block2/unit_2/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block2/unit_2/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_2/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block2/unit_2/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_2/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_2/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_2/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_2/bottleneck_v1/conv3/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add4",
+   "parent_tensor_names": [
+    "block2/unit_2/bottleneck_v1/conv3/BatchNorm",
+    "activation_12"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add4"
+    }
+   }
+  },
+  {
+   "name": "activation_15",
+   "parent_tensor_names": [
+    "add4"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_15",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_3/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_15"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_3/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_3/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_3/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_3/bottleneck_v1/conv1/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block2/unit_3/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block2/unit_3/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block2/unit_3/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_3/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block2/unit_3/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_3/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_3/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_3/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_3/bottleneck_v1/conv2/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block2/unit_3/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block2/unit_3/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block2/unit_3/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_3/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block2/unit_3/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_3/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_3/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_3/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_3/bottleneck_v1/conv3/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add5",
+   "parent_tensor_names": [
+    "block2/unit_3/bottleneck_v1/conv3/BatchNorm",
+    "activation_15"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add5"
+    }
+   }
+  },
+  {
+   "name": "activation_18",
+   "parent_tensor_names": [
+    "add5"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_18",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_4/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_18"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_4/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_4/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_4/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_4/bottleneck_v1/conv1/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block2/unit_4/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block2/unit_4/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block2/unit_4/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_4/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block2/unit_4/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_4/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_4/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_4/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_4/bottleneck_v1/conv2/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block2/unit_4/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block2/unit_4/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block2/unit_4/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_4/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block2/unit_4/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block2/unit_4/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block2/unit_4/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block2/unit_4/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block2/unit_4/bottleneck_v1/conv3/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add6",
+   "parent_tensor_names": [
+    "block2/unit_4/bottleneck_v1/conv3/BatchNorm",
+    "activation_18"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add6"
+    }
+   }
+  },
+  {
+   "name": "activation_21",
+   "parent_tensor_names": [
+    "add6"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_21",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_21"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      256
+     ],
+     "stride": 2,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_1/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block3/unit_1/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block3/unit_1/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_1/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block3/unit_1/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block3/unit_1/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_1/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/shortcut/weights",
+   "parent_tensor_names": [
+    "activation_21"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/shortcut/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      1024
+     ],
+     "stride": 2,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_1/bottleneck_v1/shortcut/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_1/bottleneck_v1/shortcut/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_1/bottleneck_v1/shortcut/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add7",
+   "parent_tensor_names": [
+    "block3/unit_1/bottleneck_v1/conv3/BatchNorm",
+    "block3/unit_1/bottleneck_v1/shortcut/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add7"
+    }
+   }
+  },
+  {
+   "name": "activation_24",
+   "parent_tensor_names": [
+    "add7"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_24",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_2/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_24"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_2/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_2/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_2/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_2/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_2/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block3/unit_2/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_2/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_2/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block3/unit_2/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_2/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_2/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_2/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_2/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_2/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block3/unit_2/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_2/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_2/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block3/unit_2/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_2/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_2/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_2/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_2/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add8",
+   "parent_tensor_names": [
+    "block3/unit_2/bottleneck_v1/conv3/BatchNorm",
+    "activation_24"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add8"
+    }
+   }
+  },
+  {
+   "name": "activation_27",
+   "parent_tensor_names": [
+    "add8"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_27",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_3/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_27"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_3/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_3/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_3/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_3/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_3/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block3/unit_3/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_3/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_3/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block3/unit_3/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_3/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_3/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_3/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_3/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_3/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block3/unit_3/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_3/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_3/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block3/unit_3/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_3/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_3/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_3/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_3/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add9",
+   "parent_tensor_names": [
+    "block3/unit_3/bottleneck_v1/conv3/BatchNorm",
+    "activation_27"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add9"
+    }
+   }
+  },
+  {
+   "name": "activation_30",
+   "parent_tensor_names": [
+    "add9"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_30",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_4/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_30"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_4/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_4/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_4/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_4/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_4/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block3/unit_4/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_4/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_4/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block3/unit_4/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_4/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_4/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_4/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_4/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_4/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block3/unit_4/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_4/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_4/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block3/unit_4/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_4/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_4/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_4/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_4/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add10",
+   "parent_tensor_names": [
+    "block3/unit_4/bottleneck_v1/conv3/BatchNorm",
+    "activation_30"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add10"
+    }
+   }
+  },
+  {
+   "name": "activation_33",
+   "parent_tensor_names": [
+    "add10"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_33",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_5/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_33"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_5/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_5/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_5/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_5/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_5/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block3/unit_5/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_5/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_5/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block3/unit_5/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_5/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_5/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_5/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_5/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_5/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block3/unit_5/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_5/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_5/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block3/unit_5/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_5/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_5/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_5/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_5/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add11",
+   "parent_tensor_names": [
+    "block3/unit_5/bottleneck_v1/conv3/BatchNorm",
+    "activation_33"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add11"
+    }
+   }
+  },
+  {
+   "name": "activation_36",
+   "parent_tensor_names": [
+    "add11"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_36",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_6/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_36"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_6/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_6/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_6/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_6/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_6/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block3/unit_6/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_6/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_6/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block3/unit_6/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_6/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_6/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_6/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_6/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block3/unit_6/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block3/unit_6/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block3/unit_6/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_6/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block3/unit_6/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block3/unit_6/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block3/unit_6/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block3/unit_6/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block3/unit_6/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add12",
+   "parent_tensor_names": [
+    "block3/unit_6/bottleneck_v1/conv3/BatchNorm",
+    "activation_36"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add12"
+    }
+   }
+  },
+  {
+   "name": "activation_39",
+   "parent_tensor_names": [
+    "add12"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_39",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_39"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      512
+     ],
+     "stride": 2,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_1/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/conv1/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block4/unit_1/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block4/unit_1/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_1/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/conv2/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block4/unit_1/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block4/unit_1/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      2048
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_1/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/conv3/BatchNorm",
+     "D": 2048,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/shortcut/weights",
+   "parent_tensor_names": [
+    "activation_39"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/shortcut/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      2048
+     ],
+     "stride": 2,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_1/bottleneck_v1/shortcut/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_1/bottleneck_v1/shortcut/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_1/bottleneck_v1/shortcut/BatchNorm",
+     "D": 2048,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add13",
+   "parent_tensor_names": [
+    "block4/unit_1/bottleneck_v1/conv3/BatchNorm",
+    "block4/unit_1/bottleneck_v1/shortcut/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add13"
+    }
+   }
+  },
+  {
+   "name": "activation_42",
+   "parent_tensor_names": [
+    "add13"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_42",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_2/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_42"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_2/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      2048,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_2/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_2/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_2/bottleneck_v1/conv1/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block4/unit_2/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block4/unit_2/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block4/unit_2/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_2/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block4/unit_2/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_2/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_2/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_2/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_2/bottleneck_v1/conv2/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block4/unit_2/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block4/unit_2/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block4/unit_2/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_2/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block4/unit_2/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_2/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      2048
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_2/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_2/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_2/bottleneck_v1/conv3/BatchNorm",
+     "D": 2048,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add14",
+   "parent_tensor_names": [
+    "block4/unit_2/bottleneck_v1/conv3/BatchNorm",
+    "activation_42"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add14"
+    }
+   }
+  },
+  {
+   "name": "activation_45",
+   "parent_tensor_names": [
+    "add14"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_45",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_3/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_45"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_3/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      2048,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_3/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_3/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_3/bottleneck_v1/conv1/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block4/unit_3/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block4/unit_3/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block4/unit_3/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_3/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block4/unit_3/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_3/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_3/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_3/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_3/bottleneck_v1/conv2/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block4/unit_3/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block4/unit_3/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block4/unit_3/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_3/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block4/unit_3/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block4/unit_3/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      2048
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block4/unit_3/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block4/unit_3/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block4/unit_3/bottleneck_v1/conv3/BatchNorm",
+     "D": 2048,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add15",
+   "parent_tensor_names": [
+    "block4/unit_3/bottleneck_v1/conv3/BatchNorm",
+    "activation_45"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add15"
+    }
+   }
+  },
+  {
+   "name": "activation_48",
+   "parent_tensor_names": [
+    "add15"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_48",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_2/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_48"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block5/unit_2/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      2048,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_2/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block5/unit_2/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block5/unit_2/bottleneck_v1/conv1/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block5/unit_2/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block5/unit_2/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block5/unit_2/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_2/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block5/unit_2/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block5/unit_2/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_2/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block5/unit_2/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block5/unit_2/bottleneck_v1/conv2/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block5/unit_2/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block5/unit_2/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block5/unit_2/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_2/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block5/unit_2/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block5/unit_2/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      2048
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_2/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block5/unit_2/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block5/unit_2/bottleneck_v1/conv3/BatchNorm",
+     "D": 2048,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add16",
+   "parent_tensor_names": [
+    "block5/unit_2/bottleneck_v1/conv3/BatchNorm",
+    "activation_48"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add16"
+    }
+   }
+  },
+  {
+   "name": "activation_51",
+   "parent_tensor_names": [
+    "add16"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_51",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_3/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_51"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block5/unit_3/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      2048,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_3/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block5/unit_3/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block5/unit_3/bottleneck_v1/conv1/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block5/unit_3/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block5/unit_3/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block5/unit_3/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_3/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block5/unit_3/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block5/unit_3/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_3/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block5/unit_3/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block5/unit_3/bottleneck_v1/conv2/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block5/unit_3/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block5/unit_3/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block5/unit_3/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_3/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block5/unit_3/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block5/unit_3/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      2048
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block5/unit_3/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block5/unit_3/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block5/unit_3/bottleneck_v1/conv3/BatchNorm",
+     "D": 2048,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add17",
+   "parent_tensor_names": [
+    "block5/unit_3/bottleneck_v1/conv3/BatchNorm",
+    "activation_51"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add17"
+    }
+   }
+  },
+  {
+   "name": "activation_54",
+   "parent_tensor_names": [
+    "add17"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_54",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_54"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      2048
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "up_block5/unit_1/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/conv1/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "up_block5/unit_1/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "up_block5/unit_1/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      1024,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "up_block5/unit_1/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/conv2/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "up_block5/unit_1/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "up_block5/unit_1/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "up_block5/unit_1/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/shortcut/weights",
+   "parent_tensor_names": [
+    "activation_54"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/shortcut/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      2048
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block5/unit_1/bottleneck_v1/shortcut/BatchNorm",
+   "parent_tensor_names": [
+    "up_block5/unit_1/bottleneck_v1/shortcut/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block5/unit_1/bottleneck_v1/shortcut/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add18",
+   "parent_tensor_names": [
+    "up_block5/unit_1/bottleneck_v1/conv3/BatchNorm",
+    "up_block5/unit_1/bottleneck_v1/shortcut/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add18"
+    }
+   }
+  },
+  {
+   "name": "activation_57",
+   "parent_tensor_names": [
+    "add18"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_57",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "concat_1",
+   "parent_tensor_names": [
+    "activation_57",
+    "activation_39"
+   ],
+   "parent_layer_info": {
+    "type": "ConcatLayer",
+    "params": {
+     "name": "concat_1",
+     "axis": 3
+    }
+   }
+  },
+  {
+   "name": "1",
+   "parent_tensor_names": [
+    "concat_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "1",
+     "shape": [
+      1,
+      1,
+      2048,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "batch_norm_1",
+   "parent_tensor_names": [
+    "1"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "batch_norm_1",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_2/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "batch_norm_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_2/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_2/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_2/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_2/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_2/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block6/unit_2/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_2/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_2/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block6/unit_2/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_2/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_2/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_2/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_2/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_2/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block6/unit_2/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_2/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_2/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block6/unit_2/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_2/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_2/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_2/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_2/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add19",
+   "parent_tensor_names": [
+    "block6/unit_2/bottleneck_v1/conv3/BatchNorm",
+    "batch_norm_1"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add19"
+    }
+   }
+  },
+  {
+   "name": "activation_60",
+   "parent_tensor_names": [
+    "add19"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_60",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_3/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_60"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_3/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_3/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_3/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_3/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_3/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block6/unit_3/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_3/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_3/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block6/unit_3/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_3/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_3/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_3/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_3/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_3/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block6/unit_3/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_3/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_3/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block6/unit_3/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_3/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_3/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_3/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_3/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add20",
+   "parent_tensor_names": [
+    "block6/unit_3/bottleneck_v1/conv3/BatchNorm",
+    "activation_60"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add20"
+    }
+   }
+  },
+  {
+   "name": "activation_63",
+   "parent_tensor_names": [
+    "add20"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_63",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_4/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_63"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_4/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_4/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_4/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_4/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_4/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block6/unit_4/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_4/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_4/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block6/unit_4/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_4/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_4/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_4/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_4/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_4/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block6/unit_4/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_4/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_4/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block6/unit_4/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_4/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_4/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_4/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_4/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add21",
+   "parent_tensor_names": [
+    "block6/unit_4/bottleneck_v1/conv3/BatchNorm",
+    "activation_63"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add21"
+    }
+   }
+  },
+  {
+   "name": "activation_66",
+   "parent_tensor_names": [
+    "add21"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_66",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_5/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_66"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_5/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_5/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_5/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_5/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_5/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block6/unit_5/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_5/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_5/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block6/unit_5/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_5/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_5/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_5/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_5/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_5/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block6/unit_5/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_5/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_5/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block6/unit_5/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_5/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_5/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_5/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_5/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add22",
+   "parent_tensor_names": [
+    "block6/unit_5/bottleneck_v1/conv3/BatchNorm",
+    "activation_66"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add22"
+    }
+   }
+  },
+  {
+   "name": "activation_69",
+   "parent_tensor_names": [
+    "add22"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_69",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_6/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_69"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_6/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      1024,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_6/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_6/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_6/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_6/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block6/unit_6/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_6/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_6/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block6/unit_6/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_6/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_6/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_6/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_6/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block6/unit_6/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block6/unit_6/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block6/unit_6/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_6/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block6/unit_6/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block6/unit_6/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      1024
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block6/unit_6/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block6/unit_6/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block6/unit_6/bottleneck_v1/conv3/BatchNorm",
+     "D": 1024,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add23",
+   "parent_tensor_names": [
+    "block6/unit_6/bottleneck_v1/conv3/BatchNorm",
+    "activation_69"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add23"
+    }
+   }
+  },
+  {
+   "name": "activation_72",
+   "parent_tensor_names": [
+    "add23"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_72",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_72"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      1024
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "up_block7/unit_1/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/conv1/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "up_block7/unit_1/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "up_block7/unit_1/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "up_block7/unit_1/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/conv2/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "up_block7/unit_1/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "up_block7/unit_1/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "up_block7/unit_1/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/conv3/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/shortcut/weights",
+   "parent_tensor_names": [
+    "activation_72"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/shortcut/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      1024
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block7/unit_1/bottleneck_v1/shortcut/BatchNorm",
+   "parent_tensor_names": [
+    "up_block7/unit_1/bottleneck_v1/shortcut/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block7/unit_1/bottleneck_v1/shortcut/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add24",
+   "parent_tensor_names": [
+    "up_block7/unit_1/bottleneck_v1/conv3/BatchNorm",
+    "up_block7/unit_1/bottleneck_v1/shortcut/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add24"
+    }
+   }
+  },
+  {
+   "name": "activation_75",
+   "parent_tensor_names": [
+    "add24"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_75",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "concat_2",
+   "parent_tensor_names": [
+    "activation_75",
+    "activation_21"
+   ],
+   "parent_layer_info": {
+    "type": "ConcatLayer",
+    "params": {
+     "name": "concat_2",
+     "axis": 3
+    }
+   }
+  },
+  {
+   "name": "11",
+   "parent_tensor_names": [
+    "concat_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "11",
+     "shape": [
+      1,
+      1,
+      1024,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "batch_norm_2",
+   "parent_tensor_names": [
+    "11"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "batch_norm_2",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block7/unit_2/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "batch_norm_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block7/unit_2/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_2/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block7/unit_2/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block7/unit_2/bottleneck_v1/conv1/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block7/unit_2/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block7/unit_2/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block7/unit_2/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_2/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block7/unit_2/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block7/unit_2/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_2/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block7/unit_2/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block7/unit_2/bottleneck_v1/conv2/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block7/unit_2/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block7/unit_2/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block7/unit_2/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_2/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block7/unit_2/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block7/unit_2/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_2/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block7/unit_2/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block7/unit_2/bottleneck_v1/conv3/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add25",
+   "parent_tensor_names": [
+    "block7/unit_2/bottleneck_v1/conv3/BatchNorm",
+    "batch_norm_2"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add25"
+    }
+   }
+  },
+  {
+   "name": "activation_78",
+   "parent_tensor_names": [
+    "add25"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_78",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_3/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_78"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block7/unit_3/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_3/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block7/unit_3/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block7/unit_3/bottleneck_v1/conv1/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block7/unit_3/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block7/unit_3/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block7/unit_3/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_3/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block7/unit_3/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block7/unit_3/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_3/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block7/unit_3/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block7/unit_3/bottleneck_v1/conv2/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block7/unit_3/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block7/unit_3/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block7/unit_3/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_3/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block7/unit_3/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block7/unit_3/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_3/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block7/unit_3/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block7/unit_3/bottleneck_v1/conv3/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add26",
+   "parent_tensor_names": [
+    "block7/unit_3/bottleneck_v1/conv3/BatchNorm",
+    "activation_78"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add26"
+    }
+   }
+  },
+  {
+   "name": "activation_81",
+   "parent_tensor_names": [
+    "add26"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_81",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_4/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_81"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block7/unit_4/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      512,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_4/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block7/unit_4/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block7/unit_4/bottleneck_v1/conv1/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block7/unit_4/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block7/unit_4/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block7/unit_4/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_4/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block7/unit_4/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block7/unit_4/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_4/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block7/unit_4/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block7/unit_4/bottleneck_v1/conv2/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block7/unit_4/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block7/unit_4/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block7/unit_4/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_4/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block7/unit_4/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block7/unit_4/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      512
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block7/unit_4/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block7/unit_4/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block7/unit_4/bottleneck_v1/conv3/BatchNorm",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add27",
+   "parent_tensor_names": [
+    "block7/unit_4/bottleneck_v1/conv3/BatchNorm",
+    "activation_81"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add27"
+    }
+   }
+  },
+  {
+   "name": "activation_84",
+   "parent_tensor_names": [
+    "add27"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_84",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_84"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      512
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "up_block8/unit_1/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/conv1/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "up_block8/unit_1/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "up_block8/unit_1/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "up_block8/unit_1/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/conv2/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "up_block8/unit_1/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "up_block8/unit_1/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "up_block8/unit_1/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/conv3/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/shortcut/weights",
+   "parent_tensor_names": [
+    "activation_84"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/shortcut/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      512
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block8/unit_1/bottleneck_v1/shortcut/BatchNorm",
+   "parent_tensor_names": [
+    "up_block8/unit_1/bottleneck_v1/shortcut/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block8/unit_1/bottleneck_v1/shortcut/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add28",
+   "parent_tensor_names": [
+    "up_block8/unit_1/bottleneck_v1/conv3/BatchNorm",
+    "up_block8/unit_1/bottleneck_v1/shortcut/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add28"
+    }
+   }
+  },
+  {
+   "name": "activation_90",
+   "parent_tensor_names": [
+    "add28"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_90",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "concat_3",
+   "parent_tensor_names": [
+    "activation_90",
+    "activation_9"
+   ],
+   "parent_layer_info": {
+    "type": "ConcatLayer",
+    "params": {
+     "name": "concat_3",
+     "axis": 3
+    }
+   }
+  },
+  {
+   "name": "12",
+   "parent_tensor_names": [
+    "concat_3"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "12",
+     "shape": [
+      1,
+      1,
+      512,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "batch_norm_3",
+   "parent_tensor_names": [
+    "12"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "batch_norm_3",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block8/unit_2/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "batch_norm_3"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block8/unit_2/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_2/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block8/unit_2/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block8/unit_2/bottleneck_v1/conv1/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block8/unit_2/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block8/unit_2/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block8/unit_2/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_2/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block8/unit_2/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block8/unit_2/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_2/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block8/unit_2/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block8/unit_2/bottleneck_v1/conv2/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block8/unit_2/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block8/unit_2/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block8/unit_2/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_2/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block8/unit_2/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block8/unit_2/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_2/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block8/unit_2/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block8/unit_2/bottleneck_v1/conv3/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add29",
+   "parent_tensor_names": [
+    "block8/unit_2/bottleneck_v1/conv3/BatchNorm",
+    "batch_norm_3"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add29"
+    }
+   }
+  },
+  {
+   "name": "activation_93",
+   "parent_tensor_names": [
+    "add29"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_93",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_3/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_93"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block8/unit_3/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      256,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_3/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block8/unit_3/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block8/unit_3/bottleneck_v1/conv1/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block8/unit_3/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block8/unit_3/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block8/unit_3/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_3/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block8/unit_3/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block8/unit_3/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_3/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block8/unit_3/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block8/unit_3/bottleneck_v1/conv2/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block8/unit_3/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block8/unit_3/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block8/unit_3/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_3/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block8/unit_3/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block8/unit_3/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      256
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block8/unit_3/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block8/unit_3/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block8/unit_3/bottleneck_v1/conv3/BatchNorm",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add30",
+   "parent_tensor_names": [
+    "block8/unit_3/bottleneck_v1/conv3/BatchNorm",
+    "activation_93"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add30"
+    }
+   }
+  },
+  {
+   "name": "activation_96",
+   "parent_tensor_names": [
+    "add30"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_96",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_96"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      256
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "up_block9/unit_1/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/conv1/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "up_block9/unit_1/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "up_block9/unit_1/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "up_block9/unit_1/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/conv2/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "up_block9/unit_1/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "up_block9/unit_1/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "up_block9/unit_1/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/conv3/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/shortcut/weights",
+   "parent_tensor_names": [
+    "activation_96"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/shortcut/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      256
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_1/bottleneck_v1/shortcut/BatchNorm",
+   "parent_tensor_names": [
+    "up_block9/unit_1/bottleneck_v1/shortcut/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block9/unit_1/bottleneck_v1/shortcut/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add31",
+   "parent_tensor_names": [
+    "up_block9/unit_1/bottleneck_v1/conv3/BatchNorm",
+    "up_block9/unit_1/bottleneck_v1/shortcut/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add31"
+    }
+   }
+  },
+  {
+   "name": "activation_102",
+   "parent_tensor_names": [
+    "add31"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_102",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "concat_4",
+   "parent_tensor_names": [
+    "activation_102",
+    "activation"
+   ],
+   "parent_layer_info": {
+    "type": "ConcatLayer",
+    "params": {
+     "name": "concat_4",
+     "axis": 3
+    }
+   }
+  },
+  {
+   "name": "13",
+   "parent_tensor_names": [
+    "concat_4"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "13",
+     "shape": [
+      1,
+      1,
+      192,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "batch_norm_4",
+   "parent_tensor_names": [
+    "13"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "batch_norm_4",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block9/unit_2/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "batch_norm_4"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block9/unit_2/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      128,
+      32
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block9/unit_2/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "block9/unit_2/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block9/unit_2/bottleneck_v1/conv1/BatchNorm",
+     "D": 32,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block9/unit_2/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "block9/unit_2/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block9/unit_2/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block9/unit_2/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "block9/unit_2/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block9/unit_2/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      32,
+      32
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block9/unit_2/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "block9/unit_2/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block9/unit_2/bottleneck_v1/conv2/BatchNorm",
+     "D": 32,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "block9/unit_2/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "block9/unit_2/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "block9/unit_2/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "block9/unit_2/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "block9/unit_2/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "block9/unit_2/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      32,
+      128
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "block9/unit_2/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "block9/unit_2/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "block9/unit_2/bottleneck_v1/conv3/BatchNorm",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add32",
+   "parent_tensor_names": [
+    "block9/unit_2/bottleneck_v1/conv3/BatchNorm",
+    "batch_norm_4"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add32"
+    }
+   }
+  },
+  {
+   "name": "activation_105",
+   "parent_tensor_names": [
+    "add32"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_105",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/conv1/weights",
+   "parent_tensor_names": [
+    "activation_105"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/conv1/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      128
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/conv1/BatchNorm",
+   "parent_tensor_names": [
+    "up_block9/unit_3/bottleneck_v1/conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/conv1/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/conv1/activ",
+   "parent_tensor_names": [
+    "up_block9/unit_3/bottleneck_v1/conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/conv1/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/conv2/weights",
+   "parent_tensor_names": [
+    "up_block9/unit_3/bottleneck_v1/conv1/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/conv2/weights",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/conv2/BatchNorm",
+   "parent_tensor_names": [
+    "up_block9/unit_3/bottleneck_v1/conv2/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/conv2/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/conv2/activ",
+   "parent_tensor_names": [
+    "up_block9/unit_3/bottleneck_v1/conv2/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/conv2/activ",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/conv3/weights",
+   "parent_tensor_names": [
+    "up_block9/unit_3/bottleneck_v1/conv2/activ"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/conv3/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/conv3/BatchNorm",
+   "parent_tensor_names": [
+    "up_block9/unit_3/bottleneck_v1/conv3/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/conv3/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/shortcut/weights",
+   "parent_tensor_names": [
+    "activation_105"
+   ],
+   "parent_layer_info": {
+    "type": "UpConvLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/shortcut/weights",
+     "shape": [
+      1,
+      1,
+      64,
+      128
+     ],
+     "size": [
+      2,
+      2
+     ],
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "up_block9/unit_3/bottleneck_v1/shortcut/BatchNorm",
+   "parent_tensor_names": [
+    "up_block9/unit_3/bottleneck_v1/shortcut/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "up_block9/unit_3/bottleneck_v1/shortcut/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.0001,
+     "use_beta": true,
+     "use_gamma": true
+    }
+   }
+  },
+  {
+   "name": "add33",
+   "parent_tensor_names": [
+    "up_block9/unit_3/bottleneck_v1/conv3/BatchNorm",
+    "up_block9/unit_3/bottleneck_v1/shortcut/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add33"
+    }
+   }
+  },
+  {
+   "name": "activation_108",
+   "parent_tensor_names": [
+    "add33"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_108",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "concat_5",
+   "parent_tensor_names": [
+    "activation_108",
+    "Input"
+   ],
+   "parent_layer_info": {
+    "type": "ConcatLayer",
+    "params": {
+     "name": "concat_5",
+     "axis": 3
+    }
+   }
+  },
+  {
+   "name": "output",
+   "parent_tensor_names": [
+    "concat_5"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "output",
+     "shape": [
+      1,
+      1,
+      67,
+      10
+     ],
+     "stride": 1,
+     "padding": "SAME",
+     "activation": "relu",
+     "use_bias": true,
+     "init_type": "he"
+    }
+   }
+  }
+ ]
+}

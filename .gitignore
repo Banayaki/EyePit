@@ -1,0 +1,4 @@
+**/checkpoint
+**/*.ckpt*
+/datasets/*
+**/.ipynb_checkpoints/*
