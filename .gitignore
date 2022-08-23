@@ -1,0 +1,13 @@
+*.png
+*.bmp
+Result
+__pycache__
+.ipynb_checkpoints/
+checkpoint
+*.ckpt*
+*.pth
+*.7z
+*.npy
+*.json
+*.csv
+datasets
